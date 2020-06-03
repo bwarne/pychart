@@ -1,0 +1,37 @@
+{
+ "_version_": 1,
+ "chart": {
+  "_version_": 1,
+  "data": [
+   {
+    "meta": {
+     "columnNames": {
+      "x": "x",
+      "y": "y"
+     }
+    },
+    "mode": "markers",
+    "orientation": "v",
+    "type": "scatter"
+   }
+  ],
+  "layout": {
+   "xaxis": {
+    "autorange": true,
+    "type": "linear"
+   },
+   "yaxis": {
+    "autorange": true,
+    "type": "linear"
+   },
+   "mapbox": {
+    "style": "open-street-map"
+   },
+   "autosize": true
+  }
+ },
+ "script": {
+  "_version_": 1,
+  "script": "from random import randrange\n\n{ \n    'x': [randrange(10) for _ in range(10)],\n    'y': [randrange(10) for _ in range(10)],\n}"
+ }
+}

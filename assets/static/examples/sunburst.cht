@@ -1,0 +1,71 @@
+{
+ "_version_": 1,
+ "chart": {
+  "_version_": 1,
+  "data": [
+   {
+    "labels": [
+     "Eve",
+     "Cain",
+     "Seth",
+     "Enos",
+     "Noam",
+     "Abel",
+     "Awan",
+     "Enoch",
+     "Azura"
+    ],
+    "labelssrc": "character",
+    "meta": {
+     "columnNames": {
+      "labels": "character",
+      "parents": "parent",
+      "values": "value"
+     }
+    },
+    "mode": "markers",
+    "parents": [
+     "",
+     "Eve",
+     "Eve",
+     "Seth",
+     "Seth",
+     "Eve",
+     "Eve",
+     "Awan",
+     "Eve"
+    ],
+    "parentssrc": "parent",
+    "type": "sunburst",
+    "values": [
+     9,
+     3,
+     7,
+     1,
+     2,
+     7,
+     6,
+     0,
+     4
+    ],
+    "valuessrc": "value"
+   }
+  ],
+  "layout": {
+   "xaxis": {
+    "autorange": true
+   },
+   "yaxis": {
+    "autorange": true
+   },
+   "mapbox": {
+    "style": "open-street-map"
+   },
+   "autosize": true
+  }
+ },
+ "script": {
+  "_version_": 1,
+  "script": "from random import randrange\n\n{\n    'character':[\"Eve\", \"Cain\", \"Seth\", \"Enos\", \"Noam\", \"Abel\", \"Awan\", \"Enoch\", \"Azura\"],\n    'parent':[\"\", \"Eve\", \"Eve\", \"Seth\", \"Seth\", \"Eve\", \"Eve\", \"Awan\", \"Eve\" ],\n    'value':[randrange(10) for _ in range(9)]\n}"
+ }
+}

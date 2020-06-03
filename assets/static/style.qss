@@ -1,0 +1,18 @@
+QPushButton.ControlBarButton {
+    border: none;
+    width: 24px;
+    height: 24px;
+    /* padding: 6px 6px 6px 6px; */
+    /* padding: 3px 3px 3px 3px; */
+    /* margin: 5px 5px 5px 5px; */
+}
+
+QPushButton:hover.ControlBarButton {
+    background-color: rgb(200, 200, 200);
+}
+
+QTextEdit.Console {
+    font-weight: normal;
+    color: #AAAAAA;
+    background-color: rgb(0, 0, 0);
+}

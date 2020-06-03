@@ -1,0 +1,66 @@
+{
+ "_version_": 1,
+ "chart": {
+  "_version_": 1,
+  "data": [
+   {
+    "hole": 0.4,
+    "hoverinfo": "none",
+    "hovertemplate": "",
+    "marker": {
+     "line": {
+      "width": 0
+     }
+    },
+    "meta": {
+     "columnNames": {
+      "values": "values"
+     }
+    },
+    "mode": "markers",
+    "opacity": 1,
+    "pull": 0.07,
+    "rotation": 65,
+    "sort": false,
+    "textinfo": "none",
+    "type": "pie"
+   }
+  ],
+  "layout": {
+   "xaxis": {
+    "autorange": true
+   },
+   "yaxis": {
+    "autorange": true,
+    "type": "linear"
+   },
+   "autosize": true,
+   "mapbox": {
+    "style": "open-street-map"
+   },
+   "extendpiecolors": true,
+   "hiddenlabels": [],
+   "showlegend": false,
+   "clickmode": "event",
+   "piecolorway": [
+    "#e41a1c",
+    "#377eb8",
+    "#4daf4a",
+    "#984ea3",
+    "#ff7f00",
+    "#ffff33",
+    "#a65628",
+    "#f781bf",
+    "#999999"
+   ],
+   "paper_bgcolor": "rgba(255, 255, 255, 0.01)",
+   "modebar": {
+    "bgcolor": "rgba(255, 255, 255, 0)"
+   }
+  }
+ },
+ "script": {
+  "_version_": 1,
+  "script": "\n# 40 103 152\n# 255 207 77\n\n{\n    'values': [0,3,0,0,0,4],\n}\n"
+ }
+}

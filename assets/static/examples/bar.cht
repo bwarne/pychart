@@ -1,0 +1,32 @@
+{
+ "_version_": 1,
+ "chart": {
+  "_version_": 1,
+  "data": [
+   {
+    "meta": {
+     "columnNames": {
+      "y": "values"
+     }
+    },
+    "mode": "markers",
+    "orientation": "v",
+    "type": "bar"
+   }
+  ],
+  "layout": {
+   "xaxis": {
+    "autorange": true
+   },
+   "yaxis": {
+    "autorange": true,
+    "type": "linear"
+   },
+   "autosize": true
+  }
+ },
+ "script": {
+  "_version_": 1,
+  "script": "from random import randrange\n\n{ 'values': [randrange(10) for _ in range(10)] }"
+ }
+}

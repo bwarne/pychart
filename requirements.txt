@@ -1,0 +1,8 @@
+cx_Freeze
+IPython
+PyQt5==5.14.2
+PyQtWebEngine==5.14.0
+QScintilla
+simplejson
+wcwidth==0.1.9
+pytest-qt
