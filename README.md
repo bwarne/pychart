@@ -16,7 +16,7 @@ After creating and saving a PyChart file, the chart can be created and exported 
 ```
 
 ### Using a Virtual Environment
-Virtual environments can be activated in your data generation script by executing the activate_this.py file:
+A virtual environment can be activated by executing the activate_this.py file in your script:
 ```python
 activate_this_file = "/path/to/virtualenv/bin/activate_this.py"
 exec(open(activate_this_file).read(), dict(__file__=activate_this_file))
