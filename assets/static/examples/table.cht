@@ -1,0 +1,80 @@
+{
+ "_version_": 1,
+ "chart": {
+  "_version_": 1,
+  "data": [
+   {
+    "cells": {
+     "fill": {
+      "colorsrc": [
+       "x-color",
+       "sine-color",
+       "random-color"
+      ]
+     },
+     "font": {},
+     "valuessrc": [
+      "x",
+      "sine",
+      "random"
+     ]
+    },
+    "header": {
+     "fill": {},
+     "font": {},
+     "values": [
+      "x",
+      "sine",
+      "random"
+     ]
+    },
+    "meta": {
+     "columnNames": {
+      "cells": {
+       "fill": {
+        "color": "x-color - sine-color - random-color"
+       },
+       "font": {
+        "color": "",
+        "size": ""
+       },
+       "values": "x - sine - random"
+      },
+      "header": {
+       "fill": {
+        "color": ""
+       },
+       "font": {
+        "color": "",
+        "size": ""
+       },
+       "values": ""
+      },
+      "x": "",
+      "y": ""
+     }
+    },
+    "mode": "markers",
+    "orientation": "v",
+    "type": "table",
+    "xsrc": "falling"
+   }
+  ],
+  "layout": {
+   "xaxis": {
+    "autorange": true
+   },
+   "yaxis": {
+    "autorange": true
+   },
+   "autosize": true,
+   "mapbox": {
+    "style": "open-street-map"
+   }
+  }
+ },
+ "script": {
+  "_version_": 1,
+  "script": "from random import randrange\nfrom math import sin, pi\n\nx = range(20)\ns = [sin(x*pi/10) for x in range(20)]\nr = [randrange(10) for _ in range(20)]\n\n{\n    'x': x,\n    'x-color': ['white'] * 20,\n    'sine': [round(v,3) for v in s],\n    'sine-color': [f'rgb({255-(v+1)*125}, {(v+1)*125}, 0)' for v in s],\n    'random': r,\n    'random-color': [f'rgb({v*25}, {255-v*25}, 0)' for v in r]\n}\n"
+ }
+}

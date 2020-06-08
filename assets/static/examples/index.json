@@ -1,6 +1,7 @@
 {
   "Bar Graph": "bar.cht",
-  "Scatter Plot": "scatter.cht",
   "Contour Plot": "contour.cht",
-  "Sunburst Plot": "sunburst.cht"
+  "Scatter Plot": "scatter.cht",
+  "Sunburst Plot": "sunburst.cht",
+  "Table Chart": "table.cht"
 }

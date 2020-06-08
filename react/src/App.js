@@ -99,7 +99,7 @@ class App extends Component {
   * May be triggered by changes in editor or layout changes in the chart.
   */
   onChartRender(data, layout, frames) {
-    dlog('onChartRender', layout)
+    dlog('onChartRender', data, layout)
 
     // plotly initially calls onRender twice so ignore the first one
     if (++this.renderCount == 1) return;

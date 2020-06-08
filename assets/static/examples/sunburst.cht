@@ -4,17 +4,6 @@
   "_version_": 1,
   "data": [
    {
-    "labels": [
-     "Eve",
-     "Cain",
-     "Seth",
-     "Enos",
-     "Noam",
-     "Abel",
-     "Awan",
-     "Enoch",
-     "Azura"
-    ],
     "labelssrc": "character",
     "meta": {
      "columnNames": {
@@ -24,30 +13,8 @@
      }
     },
     "mode": "markers",
-    "parents": [
-     "",
-     "Eve",
-     "Eve",
-     "Seth",
-     "Seth",
-     "Eve",
-     "Eve",
-     "Awan",
-     "Eve"
-    ],
     "parentssrc": "parent",
     "type": "sunburst",
-    "values": [
-     9,
-     3,
-     7,
-     1,
-     2,
-     7,
-     6,
-     0,
-     4
-    ],
     "valuessrc": "value"
    }
   ],

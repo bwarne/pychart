@@ -23,7 +23,7 @@ executables = [
 
 setup(
     name='PyChart',
-    version = '0.1',
+    version = '0.1.0',
     description = '',
     options = dict(
         build_exe = build_exe_options, 

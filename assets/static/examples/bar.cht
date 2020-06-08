@@ -6,12 +6,14 @@
    {
     "meta": {
      "columnNames": {
-      "y": "values"
+      "x": "",
+      "y": "random"
      }
     },
     "mode": "markers",
     "orientation": "v",
-    "type": "bar"
+    "type": "bar",
+    "ysrc": "random"
    }
   ],
   "layout": {
@@ -22,11 +24,14 @@
     "autorange": true,
     "type": "linear"
    },
-   "autosize": true
+   "autosize": true,
+   "mapbox": {
+    "style": "open-street-map"
+   }
   }
  },
  "script": {
   "_version_": 1,
-  "script": "from random import randrange\n\n{ 'values': [randrange(10) for _ in range(10)] }"
+  "script": "from random import randrange\nfrom math import sin, pi\n\n{\n    'random': [randrange(10) for _ in range(20)],\n    'increasing': range(20),\n    'decreasing': reversed(range(20)),\n    'sin': [sin(x/2) for x in range(20)],\n}\n"
  }
 }

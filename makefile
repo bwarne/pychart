@@ -2,6 +2,7 @@
 
 SHELL = /bin/bash
 FILE = main.py
+ARGS =
 
 all: react venv resources
 
@@ -44,4 +45,4 @@ build: all setup.py
 
 run: all
 	source venv/bin/activate && \
-	python3 -B $(FILE)
+	python3 -B $(FILE) $(ARGS)

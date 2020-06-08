@@ -18,6 +18,7 @@ from .common import disconnectSignal, debugClassMethod, getResourcePath
 # import os
 # os.environ['QTWEBENGINE_REMOTE_DEBUGGING'] = '12345'
 
+from pprint import pprint
 
 def cleanLayout(layout):
     """
@@ -40,74 +41,112 @@ def cleanLayout(layout):
 def removeSourcesFromTraces(traces):
     """
     Remove source data from chart traces data.
-    """
-    REMOVED_DATA_SOURCE_TOKEN = ''
-    MARKER_COLUMN_NAME = 'marker'
 
-    # print(traces)
+    not yet defined:
+    {'mode': 'markers', 'type': 'scatter'}
+
+    simple:
+    {
+      'meta': {'columnNames': {'x': 'inc'}},
+      'x': [],
+      'xsrc': 'inc'
+    }
+
+    extra data (header, marker, etc)
+    {
+      'header': {'fill': {'color': [], 'colorsrc': 'inc'}},
+      'meta': {'columnNames': {'header': {'fill': {'color': 'inc'}}}},
+    }
+
+
+    {
+        'cells': {'values': [[],[]],
+                 'valuessrc': ['sin', 'rand']},
+        'header': {'values': [],
+                 'valuessrc': 'inc'},
+        'meta': {'columnNames': {'cells': {'values': 'sin - rand'},
+                               'header': {'values': 'inc'}}
+    }
+
+    {
+        'cells': {},
+        'header': {},
+        'meta': {'columnNames': {'cells': {'values': ''},
+                                'header': {'values': ''}}
+    },
+    """
+    def delete(a, b):
+        for k,v in a.items():
+            if type(v) is dict:
+                delete(v, b[k])
+
+            elif type(v) is str:
+                # skip unset source name
+                if not v:
+                    continue
+
+                del b[k]
+            else:
+                assert(False)
+
     # strip values from data
     for trace in traces:
+        # if trace sources are not yet defined
         if 'meta' not in trace:
             continue
 
-        columnNames = trace['meta']['columnNames']
-        for colName, obj in columnNames.items():
-            # if special marker column
-            if colName == MARKER_COLUMN_NAME:
-                markers = trace['marker']
-                for markerName, srcName in obj.items():
-                    del markers[markerName + 'src']
-                    del markers[markerName]
-
-            elif obj != REMOVED_DATA_SOURCE_TOKEN:
-                del trace[colName + 'src']
-                del trace[colName]
+        delete(trace['meta']['columnNames'], trace)
 
 
 
 def insertSourcesIntoTraces(traces, dataSources):
     """
-    Insert source data into chart traces data.
+    Insert sources in to trace data.
     """
-    REMOVED_DATA_SOURCE_TOKEN = ''
-    MARKER_COLUMN_NAME = 'marker'
+    def insert(a, b):
+        for k,v in a.items():
+            if type(v) is dict:
+                insert(v, b[k])
 
-    # update trace data to reflect data source changes
+            # if v is a source title
+            elif type(v) is str:
+                # skip if not set
+                if not v:
+                    continue
+
+                # get data source
+                src = b[k + 'src']
+
+                # if single data source
+                if type(src) is str:
+                    if src in dataSources:
+                        b[k] = dataSources[src]
+
+                    else: # source not found
+                        a[k] = ''
+
+                # else if multiple data sources
+                elif type(src) is list:
+                    # if any data sources match
+                    if set(src).intersection(dataSources.keys()):
+                        b[k] = [dataSources[s] for s in src if s in dataSources]
+                    else:
+                        a[k] = ''
+
+                else:
+                    assert(False)
+
+            else:
+                assert(False)
+
+    # strip values from data
     for trace in traces:
         # if trace sources are not yet defined
-         # {'mode': 'markers', 'type': 'scatter'}
         if 'meta' not in trace:
             continue
 
-        # attempt to refresh trace column data
-        columnNames = trace['meta']['columnNames']
-        for colName, obj in columnNames.items():
-            # if special marker column
-            if colName == MARKER_COLUMN_NAME:
-                markerNames = obj
-                markers = trace['marker']
+        insert(trace['meta']['columnNames'], trace)
 
-                for markerName, srcName in markerNames.items():
-                    if (srcName in dataSources):
-                        markers[markerName] = dataSources[srcName]
-                        markers[markerName + 'src'] = srcName
-                    else:
-                        markerNames[markerName] = REMOVED_DATA_SOURCE_TOKEN
-
-            else:
-                srcName = obj
-                # skip if column source was removed
-                # (was missing in dataSources or removed via the UI)
-                if (srcName == REMOVED_DATA_SOURCE_TOKEN):
-                   continue
-
-                # if old source name is found in new sources
-                if (srcName in dataSources):
-                    trace[colName] = dataSources[srcName]
-                    trace[colName + 'src'] = srcName
-
-                else: # data not found in new sources
-                    columnNames[colName] = ''
 
 
 class WebCallHandler(QObject):
@@ -232,11 +271,11 @@ class ChartEditor(QtWebEngineWidgets.QWebEngineView):
     def __init__(self):
         QtWebEngineWidgets.QWebEngineView.__init__(self)
 
+        # init queue
+        self.imageRequestCallbackQueue = Queue()
+
         # disable context menu
         self.setContextMenuPolicy(Qt.NoContextMenu)
-
-        # initialize mount indicator
-        # self.editorHasMounted = False
 
         # keep references to make sure they don't get destroyed
         self.model = None
@@ -244,25 +283,17 @@ class ChartEditor(QtWebEngineWidgets.QWebEngineView):
         self.channel = QWebChannel()
         self.channel.registerObject('handler', self.handler)
 
-        # self.layout = QtWidgets.QVBoxLayout()
+        # connect to handler signals
         self.handler.chartReady.connect(self.chartReady)
         self.handler.dataChanged.connect(self.chartDataChanged)
         self.handler.layoutChanged.connect(self.chartLayoutChanged)
         self.handler.imageReady.connect(self.imageReady)
 
-
+        # load react page and set web channel
         url = 'file://' + getResourcePath('react/index.html')
         self.load(QtCore.QUrl(url))
         self.page().setWebChannel(self.channel)
 
-
-        self.imageRequestCallbackQueue = Queue()
-
-
-
-    # @property
-    # def layout(self):
-    #     self.page().runJavaScript()
 
     def setModel(self, model):
         """
@@ -273,7 +304,6 @@ class ChartEditor(QtWebEngineWidgets.QWebEngineView):
         self.model.dataChanged.connect(self.dataChanged)
         # self.dataChanged()
 
-    # @debugClassMethod
     def dataChanged(self):
         """
         Model has changed

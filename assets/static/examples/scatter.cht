@@ -12,7 +12,9 @@
     },
     "mode": "markers",
     "orientation": "v",
-    "type": "scatter"
+    "type": "scatter",
+    "xsrc": "x",
+    "ysrc": "y"
    }
   ],
   "layout": {
