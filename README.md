@@ -1,6 +1,6 @@
 ## PyChart - a python based chart design tool
 ![screenshot](assets/screenshots/sunburst.png)
-PyChart integrates a Python scripting for data generation and the Plotly react-chart-editor for interactive chart design into a Qt based application.  It's goal is to ease the friction between data and display by leveraging Python scripting for data creation and manipulation and a user interface for the often difficult process of chart design and layout.
+PyChart integrates a Python scripting for data generation and the Plotly react-chart-editor for interactive chart design into a Qt based application.  It strives to ease the friction between data and display by leveraging Python scripting for data creation and manipulation and a user interface for the often difficult process of chart design and layout.
 
 Download the [Release v0.1.0 for macOS](https://github.com/bwarne/pychart/releases/download/v0.1.0/PyChart-0.1.0.dmg)
 
